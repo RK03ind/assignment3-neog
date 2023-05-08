@@ -1,4 +1,66 @@
+* {
+  box-sizing: border-box;
+}
 .App {
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+/* TABS START */
+.city-tabs {
+  width: 281px;
+}
+.city-tabs .tab-container {
+  border: 1px solid black;
+}
+.tab-container nav {
+  display: flex;
+  flex-direction: row;
+}
+.tab-container nav button {
+  padding: 1em;
+  font-weight: 500;
+  background-color: aquamarine;
+  border: 1.5px solid black;
+  cursor: pointer;
+}
+/* TABS END */
+
+/* ROUND CARD START */
+.round-card {
+  width: 400px;
+  padding: 1em;
+  border: 1px solid black;
+}
+/* ROUND CARD END */
+
+/* TWEETS START */
+.tweets {
+  width: 400px;
   text-align: center;
 }
+.tweets-list {
+  margin-top: 1em;
+}
+.tweets-list .tweet-card {
+  text-align: center;
+  border: 4px solid skyblue;
+  margin: 1em 0 1em 0;
+}
+.tweets-list .tweet-card span {
+  margin-right: 1em;
+}
+/* TWEETS END */
+
+/* MOVIES START */
+.movies {
+  text-align: center;
+  width: 400px;
+  padding-bottom: 4em;
+}
+.movies-list {
+  margin-top: 2em;
+}
+/* MOVIES END */
