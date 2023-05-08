@@ -6,7 +6,7 @@ export const GroceryList = () => {
     toBuy: [],
     bought: [],
   });
-  const addItemRef = useRef();
+  const addItemRef = useRef(null);
 
   const addItemToList = () => {
     let itemName = addItemRef.current.value;
@@ -23,9 +23,12 @@ export const GroceryList = () => {
 
   const removeItemFromList = (removeId) => {
     setGroceryList(({ toBuy, bought }) => {
+      const itemIndex = toBuy.findIndex((item) => item.id === removeId);
+      const newToBuy = [...toBuy];
+      newToBuy.splice(itemIndex, 1);
       return {
-        toBuy: [...toBuy.filter((item) => item.id !== removeId)],
-        bought: [...bought, toBuy.find((index) => index.id === removeId)],
+        toBuy: newToBuy,
+        bought: [...bought, toBuy[itemIndex]],
       };
     });
   };
@@ -54,7 +57,7 @@ export const GroceryList = () => {
       </ul>
       {groceryList.bought.length ? <h3>Completed List</h3> : ""}
       <ul>
-        {groceryList.bought.map(({ itemName, id }, index) => {
+        {groceryList.bought.map(({ itemName, id }) => {
           return (
             <li key={id}>
               <label>{itemName}</label>

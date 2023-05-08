@@ -8,6 +8,7 @@ export const Movies = () => {
     category: "All",
     rating: "All",
   });
+  const categoryData = ["All", "Action", "Crime", "Drama"];
 
   const fetchData = async () => {
     try {
@@ -42,37 +43,23 @@ export const Movies = () => {
     <div className="movies">
       <div className="category-filter">
         Category Filter:
-        <input
-          type="radio"
-          name="All"
-          checked={filterState.category === "All"}
-          onChange={handleCategoryChange}
-        />
-        <label>All</label>
-        <input
-          type="radio"
-          name="Action"
-          checked={filterState.category === "Action"}
-          onChange={handleCategoryChange}
-        />
-        <label>Action</label>
-        <input
-          type="radio"
-          name="Crime"
-          checked={filterState.category === "Crime"}
-          onChange={handleCategoryChange}
-        />
-        <label>Crime</label>
-        <input
-          type="radio"
-          name="Drama"
-          checked={filterState.category === "Drama"}
-          onChange={handleCategoryChange}
-        />
-        <label>Drama</label>
+        {categoryData.map((name) => {
+          return (
+            <>
+              <input
+                type="radio"
+                name={name}
+                id={name}
+                checked={filterState.category === name}
+                onChange={handleCategoryChange}
+              />
+              <label htmlFor={name}>{name}</label>
+            </>
+          );
+        })}
       </div>
       <div className="rating-filter">
-        Rating Filter:{" "}
+        Rating Filter:
         <select value={filterState.rating} onChange={handleRatingChange}>
           <option value="All">All</option>
           <option value="8.0">8.0+</option>
@@ -85,11 +72,11 @@ export const Movies = () => {
         <h2>Movies</h2>
         {isLoading && <span>Loading......</span>}
         {data
-          .filter(({ category, rating }) =>
-            filterState.category === "All" && filterState.rating === "All"
-              ? true
-              : filterState.category === category &&
-                filterState.rating >= rating
+          .filter(
+            ({ category, rating }) =>
+              (filterState.category === "All" ||
+                filterState.category === category) &&
+              (filterState.rating === "All" || filterState.rating <= rating)
           )
           .map(({ title, rating, year }) => {
             return (
